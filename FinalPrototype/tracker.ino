@@ -43,10 +43,6 @@ void setup() {
     sfModule.begin(9600);
     delay(1000);
     Serial.println("started module");
-  /*for (int i = 0; i < 20; i++) {
-    if(i != 2 || i!= 3 || i != 10 || i != 11)
-    pinMode(i, OUTPUT);
-  } */
   
    pinMode(buttonPin, INPUT_PULLUP);
    pinMode(vibrationPin, INPUT_PULLUP);
@@ -102,12 +98,22 @@ void sendPosition(String pos) {
   delay(2000);
   String res = getData();
 }
+
+boolean closeToEachOther(String oldPos, String newPos) {
+  // calculate how far the old position and new position are from each other and if under a meaningful treshhold, return true
+  return false;
+}
+
 int c = 0;
+String position = "";
 void loop() {
   Serial.println("Awake");
   if(c == 0){
-    //String pos = getPosition();
-    //sendPosition(pos);
+    /*String newpos = getPosition();
+    if(!closeToEachOther(position,newpos)) {
+      //sendPosition(pos);
+      position = newpos;
+    } */
     c++;
   }
   
