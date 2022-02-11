@@ -1,14 +1,8 @@
 #include <SoftwareSerial.h>
 #include <TinyGPS++.h>
 
-struct GeoLocation
-{
-  char lat[9];
-  char lng[10];
-}
-
 TinyGPSPlus gps;
-SoftwareSerial gpsModule(16, 17);
+SoftwareSerial gpsModule(6, 7);
 SoftwareSerial sfModule(10, 11);
 const int buttonPin = 2;    // Make sure that this is the interrupt 0 pin on the board!!
 const int vibrationPin = 2; // Make sure that this is the interrupt 0 pin on the board!!
@@ -111,31 +105,20 @@ String getData()
 
 String getPosition()
 {
-  struct GeoLocation location = getGPSPosition();
-  if (location != NULL)
-  {
-  }
-  {
-    return location.lat + "|" + location.lng;
-  }
-
-  return NULL;
+  return getGPSPosition();
 }
 
-GeoLocation getGPSPosition()
+String getGPSPosition()
 {
   if (gpsModule.available() > 0)
   {
     gps.encode(gpsModule.read());
     if (gps.location.isUpdated())
     {
-      struct GeoLocation location;
-      location.lat = gps.location.lat();
-      location.lng = gps.location.lng();
-      return location;
+      return String(gps.location.lat()) + "|" + String(gps.location.lng());
     }
   }
-  return NULL;
+  return "";
 }
 
 void sendPosition(String pos)
@@ -161,10 +144,10 @@ void loop()
   if (c == 0)
   {
     /*String newpos = getPosition();
-    if(!closeToEachOther(position,newpos)) {
+      if(!closeToEachOther(position,newpos)) {
       //sendPosition(pos);
       position = newpos;
-    } */
+      } */
     c++;
   }
 
