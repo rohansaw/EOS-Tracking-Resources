@@ -2,12 +2,11 @@ import requests
 import webbrowser
 import json
 import sys
-
-
 import numpy as np
 from scipy.spatial.distance import cdist, euclidean
 
 def geometric_median(X, eps=1e-5):
+    # Source: https://stackoverflow.com/questions/30299267/geometric-median-of-multidimensional-points
     y = np.mean(X, 0)
 
     while True:
