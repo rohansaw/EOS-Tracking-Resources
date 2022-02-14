@@ -5,7 +5,7 @@ TinyGPSPlus gps;
 SoftwareSerial gpsModule(6, 7);
 SoftwareSerial sfModule(10, 11);
 const int buttonPin = 2;    // Make sure that this is the interrupt 0 pin on the board!!
-const int vibrationPin = 2; // Make sure that this is the interrupt 0 pin on the board!!
+const int vibrationPin = 3; // Make sure that this is the interrupt 0 pin on the board!!
 boolean trackingMode = true;
 
 void sleep()
