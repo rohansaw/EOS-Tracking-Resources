@@ -48,7 +48,7 @@ void print_wakeup_reason(){
 
 void setup(){
   Serial.begin(115200);
-  delay(1000); //Take some time to open up the Serial Monitor
+  delay(100); //Take some time to open up the Serial Monitor
 
   print_wakeup_reason();
 
