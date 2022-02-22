@@ -18,7 +18,21 @@ This Repository contains material related to the "Tracking Technologien" project
 
 #### Tradeoff: Energy Consumption vs. Accuracy
 
-ToDo: Insert table of values we measured
+**Localization**
+| Method             | Accuracy | Sleep Consumption | Get Location Consumption      |
+|--------------------|----------|-------------------|-------------------------------|
+| Wifi Triangulation | ~70m     | 12mA              | 122mA (2sec)                  |
+| GPS                | ~5m      | 5mA               | 45mA (TTF can be up to 20min) |
+| Sigfox             | ~8km     | 0.3uA             | 45mA (3sec)                   |
+| GSM                | ~200m    | 1mA               | not able to measure           |
+
+**Communication (Sending 12Byte)**
+| Method    | Sleep Consumption | Send Message Consumption      | Cost                  |
+|-----------|-------------------|-------------------------------|-----------------------|
+| SigFox    | 0.3uA             | ~45mA                         | ~1€/month             |
+| GSM  GPRS | 1mA               | ~450mA according to datasheet | ~6ctMB -> 12ct/month  |
+| GSM -SMS  | 1mA               | ~450mA according to datasheet | ~5ct/SMS -> expensive |
+| LoRaWan   | -                 | could be future work          | -                     |
 
 #### Final Prototype
 In our final prototype we used a arduino nano and modified the hardware to consume less power: We removed the led and voltage regulator and then used the sleep mode and disabled the analog-digital converter and brown-out detection. With this approach the consumption can be reduced to less than 1mA. We used the arduino nano, since in our observation the ESP32 devBoards that we had were not able to reach such a low power consumption as the arduino, even though accoring to the datasheet this should be possible.
