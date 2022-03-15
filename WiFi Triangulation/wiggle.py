@@ -58,6 +58,9 @@ def main():
             ('type', 'WIFI'),
         )
 
+        # This auth token was only used during the group work and is not valid anymore.
+        # If you need an auth token you can register on wigle.net or ask Mark Bader
+        # for the current token with 500 requests per day.
         auth = (
             'AIDf0f1887395c7c6d0a4cb9b1d55ac4670', '77ff99adcd69a3b061a599041c548ec0'
         )

@@ -1,30 +1,15 @@
 /*
-Deep Sleep with External Wake Up
+Light Sleep with External Wake Up
 =====================================
-This code displays how to use deep sleep with
+This code displays how to use light sleep with
 an external trigger as a wake up source and how
 to store data in RTC memory to use it over reboots
-
-This code is under Public Domain License.
-
-Hardware Connections
-======================
-Push Button to GPIO 33 pulled down with a 10K Ohm
-resistor
-
-NOTE:
-======
-Only RTC IO can be used as a source for external wake
-source. They are pins: 0,2,4,12-15,25-27,32-39.
-
-Author:
-Pranav Cherukupalli <cherukupallip@gmail.com>
 */
 
 #include "WiFi.h"
 
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
-#define TIME_TO_SLEEP  10        /* Time ESP32 will go to sleep (in seconds) */
+#define TIME_TO_SLEEP  200        /* Time ESP32 will go to sleep (in seconds) */
 
 void setup(){
   Serial.begin(115200);
@@ -52,7 +37,8 @@ void setup(){
 }
 
 void loop(){
-  // workaround for a bug with scanNetworks() after wakeup from externel source scan always fails if WiFi.mode(WIFI_OFF) is not executed before scan
+  // Workaround for a bug with scanNetworks() after wakeup from externel source.
+  // Scan always fails if WiFi.mode(WIFI_OFF) is not executed before scan.
   WiFi.mode(WIFI_OFF);
   delay(10);
   Serial.println("scan start");
@@ -65,7 +51,7 @@ void loop(){
       esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
 
       // Go to sleep now
-      Serial.println("going to sleep (10s)");
+      Serial.println("going to sleep (200s)");
       delay(10);
       esp_light_sleep_start();
       esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
@@ -79,7 +65,7 @@ void loop(){
         Serial.println(WiFi.BSSIDstr(i));
         delay(10);
     }
-    
+
     // Go to sleep now
     Serial.println("going to sleep");
     delay(10);
